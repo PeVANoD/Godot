@@ -1,0 +1,64 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scripts/GameI/Flaps/BirdSolo.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/gameI/Flaps/Flaps3.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/gameI/Flaps/Flaps2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/gameI/Flaps/Flaps1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsI2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsII2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsII3.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIII1.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIII2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIII3.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsII1.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsI1.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsI3.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIV1.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIV3.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/gameI/Flaps/FlapsIV2.png" type="Texture" id=16]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "FlyI",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "FlyII",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "FlyIII",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 16 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "FlyIV",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "FlySolo",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 21.0
+height = 24.0
+
+[node name="Bird" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "FlySolo"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+rotation = 1.5708
+shape = SubResource( 2 )

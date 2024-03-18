@@ -16,5 +16,5 @@ func _on_ChoosePlayers_pressed():
 	get_tree().get_root().get_node("Main/UI/StartUI").move(Vector2(-23000,-12000),"rect_position", Vector2(0,60),1,Tween.TRANS_QUINT,Tween.EASE_IN);
 	yield(get_tree().create_timer(2), "timeout")
 	
-	get_tree().change_scene("res://Scenes/PlayerCount.tscn")
+	var _Fix = get_tree().change_scene("res://Scenes/PlayerCount.tscn")
 

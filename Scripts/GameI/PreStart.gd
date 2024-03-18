@@ -19,6 +19,8 @@ func _on_PreNext_pressed():
 	
 
 func First():
+	KillSomeBirds()
+	
 	var T1
 	if GCD.playerCount == 1:
 		T1 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRulesSolo")
@@ -51,7 +53,7 @@ func First():
 	set_process(!is_processing())
 	
 	yield(get_tree().create_timer(0.5), "timeout")
-	
+
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt1").disabled = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt2").disabled = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt3").disabled = false
@@ -71,6 +73,10 @@ func Second():
 	var C2 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRCount2")
 	var C1 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRCount1")
 	
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt1").disabled = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt2").disabled = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt3").disabled = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt4").disabled = true
 	
 	
 	get_node("PreNext").disabled = true
@@ -122,15 +128,31 @@ func Second():
 	tween.interpolate_property(C1, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(T2.rect_position.x+get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
 	
-	yield(get_tree().create_timer(0.3), "timeout")
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/BReady").stop()
+	
+	yield(get_tree().create_timer(0.1), "timeout")
 	
 	self.visible = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/Pause").disabled = false
 	
+	AnimStop()
 	
-	yield(get_tree().create_timer(0.05), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
+	
 	
 	BirdsFromPlayers()
+	
+	get_tree().get_root().get_node("Game1main/Game2D/BG/pipeSpawn/Timer").start()
+	
+	ScoreVisible()
+	
+	get_tree().get_root().get_node("Game1main/Game2D/BG/pipeSpawn")._on_Timer_timeout()
+	
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt1").disabled = false
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt2").disabled = false
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt3").disabled = false
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt4").disabled = false
+
 	
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt1/but1").visible = true
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt2/but2").visible = true
@@ -141,24 +163,35 @@ func Second():
 
 func BirdsFromPlayers():
 	if GCD.playerCount == 1:
+		get_tree().get_root().get_node("Game1main/Game2D/Birds/Solo").Flap()
 		get_tree().get_root().get_node("Game1main/PlayerButs/butSolo").visible = true
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/Solo").player_move(true)
+		GCD.ScSolo = 0
+		print(GCD.ScP1,GCD.ScP2,GCD.ScP3,GCD.ScP4)
 	if GCD.playerCount == 2:
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P1").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P2").player_move(true)
+		GCD.ScP1 = 0
+		GCD.ScP2 = 0
 	if GCD.playerCount == 3:
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P1").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P2").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P3").player_move(true)
+		GCD.ScP1 = 0
+		GCD.ScP2 = 0
+		GCD.ScP3 = 0
 	if GCD.playerCount == 4:
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P1").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P2").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P3").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P4").player_move(true)
-	
+		GCD.ScP1 = 0
+		GCD.ScP2 = 0
+		GCD.ScP3 = 0
+		GCD.ScP4 = 0
 
 
-func _process(delta):
+func _process(_delta):
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt1").show_behind_parent = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt2").show_behind_parent = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt3").show_behind_parent = false
@@ -207,3 +240,47 @@ func _on_but3_released():
 
 func _on_but4_released():
 	GCD.But4 = 0
+
+func AnimStop():
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P1").Anim(0)
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P2").Anim(0)
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P3").Anim(0)
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P4").Anim(0)
+	
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P1/AnimatedSprite").frame = 0
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P2/AnimatedSprite").frame = 0
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P3/AnimatedSprite").frame = 0
+	get_tree().get_root().get_node("Game1main/Game2D/Birds/P4/AnimatedSprite").frame = 0
+	
+func ScoreVisible():
+	if GCD.playerCount == 1:
+		get_tree().get_root().get_node("Game1main/Scores/ScoreSolo").visible = true
+	if GCD.playerCount == 2:
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP1").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP2").visible = true
+	if GCD.playerCount == 3:
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP1").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP2").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP3").visible = true
+	if GCD.playerCount == 4:
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP1").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP2").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP3").visible = true
+		get_tree().get_root().get_node("Game1main/Scores/ScoreP4").visible = true
+
+
+func KillSomeBirds():
+	if GCD.playerCount == 1:
+		GCD.Alive1 = 0
+		GCD.Alive2 = 0
+		GCD.Alive3 = 0
+		GCD.Alive4 = 0
+	if GCD.playerCount == 2:
+		GCD.Alive3 = 0
+		GCD.Alive4 = 0
+		GCD.AliveS = 0
+	if GCD.playerCount == 3:
+		GCD.Alive4 = 0
+		GCD.AliveS = 0
+	if GCD.playerCount == 4:
+		GCD.AliveS = 0

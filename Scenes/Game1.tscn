@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Sprites/gameI/but1.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/gameI/but3.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/GameI/PlayerButs.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/GameI/PreStart.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/gameI/RulesBG.png" type="Texture" id=8]
+[ext_resource path="res://Themes/ScoreTheme.tres" type="Theme" id=9]
 [ext_resource path="res://Fonts/Raw/SmallPixel.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Sprites/gameI/RulesCount2.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/gameI/RulesCount3.png" type="Texture" id=12]
@@ -29,8 +30,80 @@
 [ext_resource path="res://Sprites/gameI/butpressed1.png" type="Texture" id=28]
 [ext_resource path="res://Sprites/gameI/butpressed2.png" type="Texture" id=29]
 [ext_resource path="res://Themes/myTheme.tres" type="Theme" id=30]
-[ext_resource path="res://Scenes/ScoreG1.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scripts/GameI/Scores.gd" type="Script" id=31]
 [ext_resource path="res://Fonts/Raw/BigPixelIn.ttf" type="DynamicFontData" id=32]
+[ext_resource path="res://Scripts/GameI/pipeSpawn.gd" type="Script" id=33]
+[ext_resource path="res://Themes/FlashShade.tres" type="Shader" id=34]
+[ext_resource path="res://Fonts/Raw/BigPixelOut.ttf" type="DynamicFontData" id=35]
+[ext_resource path="res://Scripts/GameI/EndScreen.gd" type="Script" id=36]
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 34 )
+shader_param/quantity = null
+
+[sub_resource type="Animation" id=15]
+resource_name = "BirdsReady"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("P1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 290, 220 ), Vector2( 290, 210 ), Vector2( 290, 210 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("P2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 365, 240 ), Vector2( 365, 250 ), Vector2( 365, 240 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("P3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 440, 170 ), Vector2( 440, 160 ), Vector2( 440, 160 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("P4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 210, 300 ), Vector2( 210, 300 ), Vector2( 210, 310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Solo:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 290, 210 ), Vector2( 290, 210 ), Vector2( 290, 220 ), Vector2( 290, 210 ) ]
+}
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -45,10 +118,9 @@ extra_spacing_top = -17
 extra_spacing_space = -2
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=14]
-size = 60
-extra_spacing_top = 20
-extra_spacing_bottom = 26
+[sub_resource type="DynamicFont" id=32]
+size = 80
+extra_spacing_top = 140
 extra_spacing_char = 6
 extra_spacing_space = -9
 font_data = ExtResource( 32 )
@@ -87,6 +159,249 @@ action = "butSolo"
 [sub_resource type="ShortCut" id=11]
 shortcut = SubResource( 10 )
 
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Game2D/Birds/P1:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Score1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Game2D/Birds/P1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.001, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.494118, 0.494118, 1 ), Color( 1, 0.678431, 0.462745, 1 ), Color( 1, 0.952941, 0.454902, 1 ), Color( 0.47451, 1, 0.521569, 1 ), Color( 0.478431, 0.854902, 1, 1 ), Color( 0.482353, 0.513726, 1, 1 ), Color( 0.682353, 0.466667, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Game2D/Birds/P1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Game2D/Birds/P1:material:shader_param/flash_modifier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="DynamicFont" id=20]
+size = 70
+extra_spacing_top = -11
+extra_spacing_char = 2
+font_data = ExtResource( 32 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 90
+extra_spacing_top = -8
+extra_spacing_space = -4
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=22]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 0, 0.180392, 1, 1 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
+
+[sub_resource type="DynamicFont" id=24]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 1, 0, 0, 1 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
+
+[sub_resource type="DynamicFont" id=25]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 0, 1, 0.0745098, 1 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
+
+[sub_resource type="DynamicFont" id=26]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
+
+[sub_resource type="Animation" id=28]
+resource_name = "Black"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Black:custom_fonts/font:outline_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 4, 0 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "Blue"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Blue:custom_fonts/font:outline_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 4, 0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "Green"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Green:custom_fonts/font:outline_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 4, 0 ]
+}
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Green:custom_fonts/font:outline_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Black:custom_fonts/font:outline_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:custom_fonts/font:outline_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Blue:custom_fonts/font:outline_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../..:custom_fonts/font:outline_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Red"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_fonts/font:outline_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 4, 0 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "Winner"
+length = 4.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("../..:custom_fonts/font:outline_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1.3, 2, 2.4, 2.9, 3.2, 3.5, 3.7, 4.1, 4.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0 ]
+}
+
 [node name="Game1main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,6 +411,7 @@ script = ExtResource( 5 )
 script = ExtResource( 17 )
 
 [node name="BG" type="ParallaxBackground" parent="Game2D"]
+layer = -10
 script = ExtResource( 19 )
 
 [node name="Base" type="Sprite" parent="Game2D/BG"]
@@ -110,7 +426,16 @@ motion_mirroring = Vector2( 1600, 0 )
 texture = ExtResource( 18 )
 offset = Vector2( 800, 288 )
 
+[node name="pipeSpawn" type="Node2D" parent="Game2D/BG"]
+position = Vector2( 1080, 240 )
+scale = Vector2( 3, 3 )
+script = ExtResource( 33 )
+
+[node name="Timer" type="Timer" parent="Game2D/BG/pipeSpawn"]
+wait_time = 2.0
+
 [node name="Floor" type="ParallaxLayer" parent="Game2D/BG"]
+motion_scale = Vector2( 2, 1 )
 motion_mirroring = Vector2( 1600, 0 )
 
 [node name="Floor" type="Sprite" parent="Game2D/BG/Floor"]
@@ -121,27 +446,46 @@ offset = Vector2( 800, 288 )
 
 [node name="P1" parent="Game2D/Birds" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 290, 220 )
+position = Vector2( 290, 218.333 )
+collision_layer = 128
+collision_mask = 128
+gravity = 800.0
 script = ExtResource( 23 )
 
 [node name="P2" parent="Game2D/Birds" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 365, 250 )
+material = SubResource( 18 )
+position = Vector2( 365, 240 )
+collision_layer = 128
+collision_mask = 128
+gravity = 800.0
 script = ExtResource( 22 )
 
 [node name="P3" parent="Game2D/Birds" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 440, 170 )
+position = Vector2( 440, 161.667 )
+collision_layer = 128
+collision_mask = 128
+gravity = 800.0
 script = ExtResource( 24 )
 
 [node name="P4" parent="Game2D/Birds" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 210, 310 )
+position = Vector2( 210, 305 )
+collision_layer = 128
+collision_mask = 128
+gravity = 800.0
 script = ExtResource( 21 )
 
 [node name="Solo" parent="Game2D/Birds" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 290, 220 )
+position = Vector2( 290, 210 )
+collision_layer = 128
+collision_mask = 128
+gravity = 800.0
+
+[node name="BReady" type="AnimationPlayer" parent="Game2D/Birds"]
+anims/BirdsReady = SubResource( 15 )
 
 [node name="PlayerButs" type="Control" parent="."]
 pause_mode = 2
@@ -149,10 +493,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
 
-[node name="ScoreG1" parent="PlayerButs" instance=ExtResource( 31 )]
-visible = false
-
 [node name="PreStart" type="Control" parent="PlayerButs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 7 )
@@ -314,12 +656,10 @@ custom_colors/default_color = Color( 1, 1, 1, 0.941176 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -9
 custom_constants/shadow_offset_y = 5
-custom_fonts/normal_font = SubResource( 14 )
+custom_fonts/normal_font = SubResource( 32 )
 bbcode_enabled = true
-bbcode_text = "
-  [wave]        READY?"
-text = "
-          READY?"
+bbcode_text = "  [wave]    READY?"
+text = "      READY?"
 
 [node name="HoldButts" type="RichTextLabel" parent="PlayerButs/PreStart/PreRulesText2"]
 anchor_right = 1.0
@@ -551,6 +891,190 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "Quit"
 
+[node name="Scores" type="Control" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 31 )
+
+[node name="ScoreP1" type="Label" parent="Scores"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 160.0
+margin_top = -128.0
+margin_right = 360.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 200, 80 )
+theme = ExtResource( 9 )
+text = "
+ 10"
+
+[node name="ScoreP2" type="Label" parent="Scores"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.0
+margin_top = -130.0
+margin_right = -150.0
+margin_bottom = -12.0
+rect_min_size = Vector2( 200, 80 )
+theme = ExtResource( 9 )
+text = " 	
+    10"
+
+[node name="ScoreP3" type="Label" parent="Scores"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -350.0
+margin_right = -150.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 200, 80 )
+theme = ExtResource( 9 )
+text = "    10"
+
+[node name="ScoreP4" type="Label" parent="Scores"]
+visible = false
+margin_left = 160.0
+margin_right = 360.0
+margin_bottom = 118.0
+rect_min_size = Vector2( 200, 80 )
+theme = ExtResource( 9 )
+text = " 10"
+
+[node name="ScoreSolo" type="Label" parent="Scores"]
+visible = false
+margin_left = 40.0
+margin_right = 240.0
+margin_bottom = 118.0
+rect_min_size = Vector2( 200, 80 )
+theme = ExtResource( 9 )
+text = "Score
+     10"
+
+[node name="PlayerScored" type="AnimationPlayer" parent="Scores"]
+anims/RESET = SubResource( 19 )
+anims/Score1 = SubResource( 16 )
+
+[node name="EndScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 36 )
+
+[node name="EndScore" type="Button" parent="EndScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.05176e-05
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="GameOver" type="RichTextLabel" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -345.0
+margin_top = -200.0
+margin_right = 325.0
+margin_bottom = -40.0
+rect_min_size = Vector2( 600, 160 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -8
+custom_constants/shadow_offset_y = 5
+custom_fonts/normal_font = SubResource( 20 )
+text = " gAMe over"
+
+[node name="Winner!" type="Label" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -345.0
+margin_top = -30.0
+margin_right = 325.0
+margin_bottom = 130.0
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -5
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+custom_fonts/font = SubResource( 21 )
+text = "  AND THE WINNER IS..."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Winner!"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -101.5
+margin_top = 1.0
+margin_right = 101.5
+margin_bottom = 197.0
+
+[node name="Blue" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+visible = false
+margin_right = 203.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 22 )
+text = " blue!"
+
+[node name="Red" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+visible = false
+margin_right = 203.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 24 )
+text = "  red!"
+
+[node name="Green" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+visible = false
+margin_right = 203.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 25 )
+text = "green!"
+
+[node name="Black" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+visible = false
+margin_right = 203.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 26 )
+text = "black!"
+
+[node name="WinAnim" type="AnimationPlayer" parent="EndScreen/Winner!"]
+root_node = NodePath("../VBoxContainer/Red")
+anims/Black = SubResource( 28 )
+anims/Blue = SubResource( 29 )
+anims/Green = SubResource( 23 )
+anims/RESET = SubResource( 27 )
+anims/Red = SubResource( 30 )
+anims/Winner = SubResource( 31 )
+
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timer" to="Game2D/BG/pipeSpawn" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Game2D/Birds/P1" to="Game2D/Birds/P1" method="_on_P1_body_entered"]
+[connection signal="body_entered" from="Game2D/Birds/P2" to="Game2D/Birds/P2" method="_on_P2_body_entered"]
+[connection signal="body_entered" from="Game2D/Birds/P3" to="Game2D/Birds/P3" method="_on_P3_body_entered"]
+[connection signal="body_entered" from="Game2D/Birds/P4" to="Game2D/Birds/P4" method="_on_P4_body_entered"]
+[connection signal="body_entered" from="Game2D/Birds/Solo" to="Game2D/Birds/Solo" method="_on_Solo_body_entered"]
 [connection signal="pressed" from="PlayerButs/PreStart/PreNext" to="PlayerButs/PreStart" method="_on_PreNext_pressed"]
 [connection signal="button_up" from="PlayerButs/butt1" to="PlayerButs/PreStart" method="_on_but1_released"]
 [connection signal="pressed" from="PlayerButs/butt1" to="PlayerButs" method="_on_but1_pressed"]

@@ -4,7 +4,7 @@ extends CheckButton
 func _ready():
 	pass
 
-func _on_GameList_toggled(button_toggled):
+func _on_GameList_toggled(_button_toggled):
 	
 	var tween = Tween.new()
 	add_child(tween)

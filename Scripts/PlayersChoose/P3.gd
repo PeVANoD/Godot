@@ -40,10 +40,10 @@ func GameStart():
 	
 	if gNum == 1:
 		if pCount == 1:
-			get_tree().change_scene("res://Scenes/Game1.tscn")
+			var _Fix = get_tree().change_scene("res://Scenes/Game1.tscn")
 		else:
-			get_tree().change_scene("res://Scenes/Game1.tscn")
+			var _Fix = get_tree().change_scene("res://Scenes/Game1.tscn")
 	if gNum == 2:
-		get_tree().change_scene("res://Scenes/NotReady.tscn")
+		var _Fix = get_tree().change_scene("res://Scenes/NotReady.tscn")
 	if gNum == 3:
-		get_tree().change_scene("res://Scenes/NotReady.tscn")
+		var _Fix = get_tree().change_scene("res://Scenes/NotReady.tscn")

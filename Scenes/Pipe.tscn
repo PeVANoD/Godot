@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/gameI/Pipe.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11.6323, 30.6058 )
+
+[node name="Pipe" type="KinematicBody2D"]
+collision_layer = 128
+collision_mask = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.38419e-07, 8 )
+scale = Vector2( 1.03161, 3.00596 )
+shape = SubResource( 1 )

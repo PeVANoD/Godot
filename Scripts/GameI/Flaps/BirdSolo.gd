@@ -34,12 +34,15 @@ func _process(delta):
 			velocity.y = JUMP_VELOCITY
 			$AnimatedSprite.play("FlySolo")
 			flap = 0
-	
+		if (position.y <-10): 	
+			GCD.AliveS = 0
 		if (position.y < 470): 
 			position += velocity * delta
 		else:
 			GCD.AliveS = 0
 	else:
+		if velocity.y < 0:
+			velocity.y = 0
 		if (position.y < 470): 
 			velocity.y += gravity * delta
 			position += velocity * delta

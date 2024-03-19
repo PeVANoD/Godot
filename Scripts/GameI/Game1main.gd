@@ -5,6 +5,24 @@ onready var GCD = get_node("/root/SsGameChooseData")
 func _ready():
 	var pCount = get_node("/root/SsGameChooseData").playerCount
 	
+	GCD.ScSolo = -1
+	GCD.ScP1 = -1
+	GCD.ScP2 = -1
+	GCD.ScP3 = -1
+	GCD.ScP4 = -1
+	GCD.Stop = 0
+	GCD.Winner = 0
+	GCD.Stopped = 0
+	GCD.AreWeAlive = 5
+	GCD.Alive1 = 1
+	GCD.Alive2 = 1
+	GCD.Alive3 = 1
+	GCD.Alive4 = 1
+	GCD.AliveS = 1
+	GCD.PrevY = 0
+	GCD.PrevYY = 0
+	GCD.PrevYYY = 0
+	
 	
 	var pipeSpawn = get_node("Game2D/BG/pipeSpawn")
 	pipeSpawn.position = Vector2(get_viewport_rect().size.x+40,pipeSpawn.position.y)
@@ -82,3 +100,5 @@ func ActivatePlayer(num):
 	if (num == 5):
 		get_node("Game2D/Birds/Solo").visible = true
 		get_node("Game2D/Birds/Solo").set_collision_layer_bit(5, 32)
+
+

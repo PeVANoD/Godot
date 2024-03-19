@@ -107,7 +107,7 @@ func Second():
 	
 	tween.interpolate_property(C3, "rect_scale",Vector2(1, 1),Vector2(0, 0),  0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
-	tween.interpolate_property(C3, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(T2.rect_position.x+get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
+	tween.interpolate_property(C3, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(T2.get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
 	tween.interpolate_property(C2, "rect_position",Vector2(T2.rect_position.x, 576),Vector2(T2.rect_position.x, 0), 1,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
@@ -116,7 +116,7 @@ func Second():
 	
 	tween.interpolate_property(C2, "rect_scale",Vector2(1, 1),Vector2(0, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
-	tween.interpolate_property(C2, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(T2.rect_position.x+get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
+	tween.interpolate_property(C2, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
 	tween.interpolate_property(C1, "rect_position",Vector2(T2.rect_position.x, 576),Vector2(T2.rect_position.x, 0), 1,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
@@ -125,7 +125,7 @@ func Second():
 	
 	tween.interpolate_property(C1, "rect_scale",Vector2(1, 1),Vector2(0, 0),  0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
-	tween.interpolate_property(C1, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(T2.rect_position.x+get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
+	tween.interpolate_property(C1, "rect_position",Vector2(T2.rect_position.x, 0),Vector2(get_viewport_rect().size.x/2, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 	tween.start()
 	
 	get_tree().get_root().get_node("Game1main/Game2D/Birds/BReady").stop()
@@ -167,7 +167,6 @@ func BirdsFromPlayers():
 		get_tree().get_root().get_node("Game1main/PlayerButs/butSolo").visible = true
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/Solo").player_move(true)
 		GCD.ScSolo = 0
-		print(GCD.ScP1,GCD.ScP2,GCD.ScP3,GCD.ScP4)
 	if GCD.playerCount == 2:
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P1").player_move(true)
 		get_tree().get_root().get_node("Game1main/Game2D/Birds/P2").player_move(true)

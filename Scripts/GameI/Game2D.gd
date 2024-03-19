@@ -5,7 +5,7 @@ onready var GCD = get_node("/root/SsGameChooseData")
 var Pipes = preload("res://Scenes/PipeHandler.tscn")
 var StopPipes = Pipes.instance()
 
-var Win = 0
+var CheckWin = 1
 
 onready var P1 = get_node("Birds/P1")
 onready var P2 = get_node("Birds/P2")
@@ -19,39 +19,49 @@ func _process(_delta):
 	CheckButs()
 	
 	GCD.AreWeAlive = GCD.Alive1 + GCD.Alive2 + GCD.Alive3 + GCD.Alive4 + GCD.AliveS -1
+	
 	if  GCD.playerCount == 1 and GCD.AliveS == 0:
 		get_tree().paused = true
 		set_process(!is_processing())
+		
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().get_root().get_node("Game1main/EndScreen").End()
 		return
 	
-	if (GCD.AreWeAlive == -1) and Win == 0 and GCD.AliveS == 0:
+	if (GCD.AreWeAlive == -1) and CheckWin == 1 and GCD.AliveS == 0:
 		set_process(!is_processing())
-		BirdsBack()
-		get_node("BG/pipeSpawn").Stopped = 1
+
 		PipeOff()
 		GCD.Winner = max(GCD.ScP1,GCD.Winner)
 		GCD.Winner = max(GCD.ScP2,GCD.Winner)
 		GCD.Winner = max(GCD.ScP3,GCD.Winner)
 		GCD.Winner = max(GCD.ScP4,GCD.Winner)
+		GCD.Stopped = 1
+		preOFF()
 		yield(get_tree().create_timer(0.5), "timeout")
 		OFF()
+		yield(get_tree().create_timer(0.5), "timeout")
+		GCD.Stopped = 2
+		get_tree().get_root().get_node("Game1main/EndScreen").End()
+		return
 		
-	elif !(GCD.AreWeAlive) and GCD.AliveS == 0:
-		yield(get_tree().create_timer(3.7), "timeout")
-		Win = 1
-		if !(GCD.AreWeAlive) and Win == 1:
-			Win = 0
+	if (GCD.AreWeAlive == 0) and GCD.AliveS == 0:
+		yield(get_tree().create_timer(4.1), "timeout")
+		if (GCD.AreWeAlive == 0) and CheckWin == 1:
+			CheckWin = 0
 			set_process(!is_processing())
-			BirdsBack()
-			get_node("BG/pipeSpawn").Stopped = 1
 			PipeOff()
 			GCD.Winner = max(GCD.ScP1,GCD.Winner)
 			GCD.Winner = max(GCD.ScP2,GCD.Winner)
 			GCD.Winner = max(GCD.ScP3,GCD.Winner)
 			GCD.Winner = max(GCD.ScP4,GCD.Winner)
+			GCD.Stopped = 1
+			preOFF()
 			OFF()
+			yield(get_tree().create_timer(0.5), "timeout")
+			GCD.Stopped = 2
+			get_tree().get_root().get_node("Game1main/EndScreen").End()
+			return
 	
 		
 
@@ -82,26 +92,18 @@ func OFF():
 	P3.player_move(false)
 	P4.player_move(false)
 	
+	yield(get_tree().create_timer(1.15), "timeout")
+	
+	#get_tree().get_root().get_node("Game1main/PlayerButs/PauseUI").Paused()
+	
+func preOFF():
 	P1.visible = false
 	P2.visible = false
 	P3.visible = false
 	P4.visible = false
-	
-	print("Score: ", GCD.Winner)
-	print(GCD.ScP1)
-	print(GCD.ScP2)
-	print(GCD.ScP3)
-	print(GCD.ScP4)
-	print(GCD.ScSolo, "\n")
-	
 	whoWin()
-	
 	goAnim()
-	
-	yield(get_tree().create_timer(1.15), "timeout")
-	
-	get_tree().get_root().get_node("Game1main/PlayerButs/PauseUI").Paused()
-	
+	BirdsBack()
 	
 func whoWin():
 	if GCD.Winner == GCD.ScP1:
@@ -115,51 +117,58 @@ func whoWin():
 
 
 func BirdsBack():
-	var shift = GCD.PrevYY
-	var sshift = GCD.PrevY
+	var shift = GCD.PrevY
 	var tween = Tween.new()
 	add_child(tween)
-	tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(290,240+shift*1.2),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P1, "rotation_degrees",P1.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
 	
-	tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(365,240+shift*1.05),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P2, "rotation_degrees",P2.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	
-	tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(440,240+shift*0.95),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P3, "rotation_degrees",P3.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	
-	tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(210,240+shift*0.8),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P4, "rotation_degrees",P4.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
+	if GCD.Stopped == 1:
+		tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(440,240+shift*0.95),2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+		tween.start()
+		tween.interpolate_property(P3, "rotation_degrees",P3.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+		tween.start()
+		yield(get_tree().create_timer(0.4), "timeout")
+		tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(365,240+shift*1.05),1.6,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+		tween.start()
+		tween.interpolate_property(P2, "rotation_degrees",P2.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+		tween.start()
+		yield(get_tree().create_timer(0.4), "timeout")
+		tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(290,240+shift*1.1),1.2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+		tween.start()
+		tween.interpolate_property(P1, "rotation_degrees",P1.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+		tween.start()
+		yield(get_tree().create_timer(0.4), "timeout")
+		tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(210,240+shift*1),0.8,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+		tween.start()
+		tween.interpolate_property(P4, "rotation_degrees",P4.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+		tween.start()
+		yield(get_tree().create_timer(0.8), "timeout")
 
-	shift = sshift
+		shift = GCD.PrevY
+		
+
 	
-	tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(290,240+shift*1.2),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P1, "rotation_degrees",P1.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	
-	tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(365,240+shift*1.05),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P2, "rotation_degrees",P2.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	
-	tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(440,240+shift*0.95),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P3, "rotation_degrees",P3.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	
-	tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(210,240+shift*0.8),1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
-	tween.interpolate_property(P4, "rotation_degrees",P4.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
-	tween.start()
+#		if GCD.Stopped == 2:
+#			tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(440,240+shift*0.95),2*twSpeed,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+#			tween.start()
+#			tween.interpolate_property(P3, "rotation_degrees",P3.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+#			tween.start()
+#			yield(get_tree().create_timer(0.4), "timeout")
+#			tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(365,240+shift*1.05),2*twSpeed,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+#			tween.start()
+#			tween.interpolate_property(P2, "rotation_degrees",P2.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+#			tween.start()
+#			yield(get_tree().create_timer(0.4), "timeout")
+#			tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(290,240+shift*1.1),2*twSpeed,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+#			tween.start()
+#			tween.interpolate_property(P1, "rotation_degrees",P1.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+#			tween.start()
+#			yield(get_tree().create_timer(0.4), "timeout")
+#			tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(210,240+shift*0.9),2*twSpeed,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+#			tween.start()
+#			tween.interpolate_property(P4, "rotation_degrees",P4.rotation_degrees,0,1,Tween.TRANS_QUAD,Tween.EASE_IN)
+#			tween.start()
+#			yield(get_tree().create_timer(0.8), "timeout")
+			
 
 
 func goAnim():

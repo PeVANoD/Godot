@@ -53,8 +53,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 21.0
-height = 24.0
+radius = 20.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "AB2"
@@ -209,6 +208,7 @@ script = ExtResource( 1 )
 material = SubResource( 8 )
 frames = SubResource( 3 )
 animation = "FlySolo"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

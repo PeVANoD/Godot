@@ -36,32 +36,31 @@ func _process(delta):
 			velocity.y = JUMP_VELOCITY
 			$AnimatedSprite.play("FlyII")
 			flap = 0
-	
+		if (position.y <-10): 	
+			GCD.Alive2 = 0
 		if (position.y < 470): 
 			position += velocity * delta
 		else:
 			GCD.Alive2 = 0
 	else:
+		if velocity.y < 0:
+			velocity.y = 0
 		if (position.y < 470): 
 			velocity.y += gravity * delta
 			position += velocity * delta
 		position.x += SPEED * delta
 	
+	
 func player_move(value: bool) -> void:
 	set_process(value)
 	
-
 func Anim(smth):
 	if smth:
 		get_node("Anim").play("AB2")
 	else:
 		get_node("Anim").stop()
 
-
-
 	
-
-
 func _on_P2_body_entered(_body):
 	GCD.Alive2 = 0
 	self.set_collision_layer_bit(2, false)

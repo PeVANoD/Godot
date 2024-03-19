@@ -4,6 +4,7 @@ func _ready():
 	set_process(!is_processing())
 
 onready var GCD = get_node("/root/SsGameChooseData")
+
 var Zero1 = preload("res://Scripts/GameI/Flaps/P1.gd")
 var Zero2 = preload("res://Scripts/GameI/Flaps/P2.gd")
 var Zero3 = preload("res://Scripts/GameI/Flaps/P3.gd")
@@ -11,14 +12,17 @@ var Zero4 = preload("res://Scripts/GameI/Flaps/P4.gd")
 
 func Paused():
 	ButPause()
-	set_process(!is_processing())
 	
 	GCD.Paused = 1
 	
-	if (!(GCD.AreWeAlive))and GCD.playerCount!=1 :
+	set_process(!is_processing())
+	
+	if (!(GCD.AreWeAlive)) and GCD.playerCount != 1:
 		set_process(1)
 		End()
 		return
+	else:
+		get_tree().paused = true
 	
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt1/but1").visible = false
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt2/but2").visible = false
@@ -31,7 +35,7 @@ func Paused():
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt4").disabled = true
 	
 	
-	get_tree().paused = true
+	
 	if (GCD.AreWeAlive):
 		var tween = Tween.new()
 		add_child(tween)
@@ -63,9 +67,9 @@ func UnPaused():
 	
 	if GCD.playerCount == 1:
 		get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRulesText2/HoldButts").visible = false
-	
-	T2.rect_position = Vector2(T2.rect_position.x, 0)
-	T2.rect_scale = Vector2(1,1)
+	if GCD.playerCount != 1:
+		T2.rect_position = Vector2(T2.rect_position.x, 0)
+		T2.rect_scale = Vector2(1,1)
 	
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt1/but1").visible = true
 	get_tree().get_root().get_node("Game1main/PlayerButs/butt2/but2").visible = true
@@ -136,13 +140,13 @@ func Second():
 	var tween = Tween.new()
 	add_child(tween)
 
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		tween.interpolate_property(T2, "rect_position",Vector2(T2.rect_position.x,0),Vector2(T2.rect_position.x, -576), 0.5, Tween.TRANS_EXPO,Tween.EASE_IN)
 		tween.start()
 	else:
 		return
 		
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		yield(get_tree().create_timer(0.5), "timeout")
 		tween.interpolate_property(C3, "rect_position",Vector2(T2.rect_position.x, 576),Vector2(T2.rect_position.x, 0), 1,Tween.TRANS_EXPO, Tween.EASE_OUT)
 		tween.start()
@@ -150,7 +154,7 @@ func Second():
 		tween.stop_all()
 		return
 	
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		yield(get_tree().create_timer(0.5), "timeout")
 		tween.interpolate_property(C3, "rect_scale",Vector2(1, 1),Vector2(0, 0),  0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 		tween.start()
@@ -162,7 +166,7 @@ func Second():
 		tween.stop_all()
 		return
 
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		yield(get_tree().create_timer(0.5), "timeout")
 		tween.interpolate_property(C2, "rect_scale",Vector2(1, 1),Vector2(0, 0), 0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 		tween.start()
@@ -175,7 +179,7 @@ func Second():
 		tween.stop_all()
 		return
 
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		yield(get_tree().create_timer(0.5), "timeout")
 		tween.interpolate_property(C1, "rect_scale",Vector2(1, 1),Vector2(0, 0),  0.4,Tween.TRANS_EXPO, Tween.EASE_OUT)
 		tween.start()
@@ -188,7 +192,7 @@ func Second():
 		
 	yield(get_tree().create_timer(0.3), "timeout")
 	
-	if GCD.Paused == 0:
+	if !GCD.Paused:
 		get_tree().get_root().get_node("Game1main/PlayerButs/PreStart").visible = false
 		get_tree().paused = false
 		get_tree().get_root().get_node("Game1main/PlayerButs/Pause").disabled = false
@@ -241,6 +245,7 @@ func _on_Resume_pressed():
 
 func _on_Restart_pressed():
 	moveBut("Restart")
+	GCD.Restart = 1
 	yield(get_tree().create_timer(0.2), "timeout")
 	
 	#VisCount()
@@ -250,6 +255,11 @@ func _on_Restart_pressed():
 	GCD.Alive4 = 1
 	GCD.AliveS = 1
 	GCD.Winner = 0
+	
+	GCD.But1 = 0
+	GCD.But2 = 0
+	GCD.But3 = 0
+	GCD.But4 = 0
 	
 	
 	get_tree().get_root().get_node("Game1main/PlayerButs/Pause").show_behind_parent = true
@@ -279,6 +289,7 @@ func _on_Quit_pressed():
 
 
 func ButPause():
+	GCD.First = 0
 	var But = get_tree().get_root().get_node("Game1main/PlayerButs/Pause")
 	if (GCD.AreWeAlive):
 		But.show_behind_parent = false
@@ -287,6 +298,13 @@ func ButPause():
 	var C3 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRCount3")
 	var C2 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRCount2")
 	var C1 = get_tree().get_root().get_node("Game1main/PlayerButs/PreStart/PreRCount1")
+	
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt1").show_behind_parent = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt2").show_behind_parent = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt3").show_behind_parent = true
+	get_tree().get_root().get_node("Game1main/PlayerButs/butt4").show_behind_parent = true
+	
+	
 	T2.rect_position = Vector2(T2.rect_position.x, 576)
 	T2.visible = false
 	C3.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Sprites/gameI/but1.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/gameI/but3.png" type="Texture" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://Themes/FlashShade.tres" type="Shader" id=34]
 [ext_resource path="res://Fonts/Raw/BigPixelOut.ttf" type="DynamicFontData" id=35]
 [ext_resource path="res://Scripts/GameI/EndScreen.gd" type="Script" id=36]
+[ext_resource path="res://Fonts/Raw/GreekPixel.ttf" type="DynamicFontData" id=37]
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 34 )
@@ -217,8 +218,21 @@ tracks/2/keys = {
 [sub_resource type="DynamicFont" id=20]
 size = 70
 extra_spacing_top = -11
-extra_spacing_char = 2
+extra_spacing_char = 7
 font_data = ExtResource( 32 )
+
+[sub_resource type="DynamicFont" id=34]
+size = 35
+extra_spacing_char = 3
+font_data = ExtResource( 37 )
+
+[sub_resource type="DynamicFont" id=35]
+size = 80
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=36]
+size = 80
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=21]
 size = 90
@@ -264,6 +278,7 @@ font_data = ExtResource( 35 )
 
 [sub_resource type="Animation" id=28]
 resource_name = "Black"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Black:custom_fonts/font:outline_size")
 tracks/0/interp = 1
@@ -273,7 +288,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 0, 4, 0 ]
 }
 
@@ -382,7 +397,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 0, 4, 0 ]
 }
 
@@ -428,11 +443,40 @@ offset = Vector2( 800, 288 )
 
 [node name="pipeSpawn" type="Node2D" parent="Game2D/BG"]
 position = Vector2( 1080, 240 )
-scale = Vector2( 3, 3 )
 script = ExtResource( 33 )
 
 [node name="Timer" type="Timer" parent="Game2D/BG/pipeSpawn"]
 wait_time = 2.0
+
+[node name="Timers" type="Node" parent="Game2D/BG/pipeSpawn"]
+
+[node name="TimerY" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="TimerYY" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="TimerforSecond" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 1.9
+one_shot = true
+
+[node name="TimerforFirst" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 1.5
+one_shot = true
+
+[node name="TimerforBirds1" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="TimerforBirds2" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="TimerforBirds3" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Floor" type="ParallaxLayer" parent="Game2D/BG"]
 motion_scale = Vector2( 2, 1 )
@@ -727,9 +771,9 @@ pause_mode = 2
 show_behind_parent = true
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = -50.0
+margin_left = -48.0
 margin_top = -150.0
-margin_right = 150.0
+margin_right = 152.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 50, 150 )
 focus_mode = 0
@@ -892,9 +936,11 @@ enabled_focus_mode = 0
 text = "Quit"
 
 [node name="Scores" type="Control" parent="."]
+pause_mode = 2
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 114, 50 )
 mouse_filter = 2
 script = ExtResource( 31 )
 
@@ -947,6 +993,7 @@ theme = ExtResource( 9 )
 text = " 10"
 
 [node name="ScoreSolo" type="Label" parent="Scores"]
+pause_mode = 2
 visible = false
 margin_left = 40.0
 margin_right = 240.0
@@ -961,34 +1008,132 @@ anims/RESET = SubResource( 19 )
 anims/Score1 = SubResource( 16 )
 
 [node name="EndScreen" type="Control" parent="."]
+pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 36 )
-
-[node name="EndScore" type="Button" parent="EndScreen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -3.05176e-05
-focus_mode = 0
-enabled_focus_mode = 0
-flat = true
 
 [node name="GameOver" type="RichTextLabel" parent="EndScreen"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -345.0
-margin_top = -200.0
-margin_right = 325.0
-margin_bottom = -40.0
-rect_min_size = Vector2( 600, 160 )
+margin_left = -317.0
+margin_top = -180.0
+margin_right = 383.0
+margin_bottom = -20.0
+rect_min_size = Vector2( 700, 160 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 343, 140 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -8
 custom_constants/shadow_offset_y = 5
 custom_fonts/normal_font = SubResource( 20 )
-text = " gAMe over"
+bbcode_enabled = true
+bbcode_text = "[shake rate=10 level=10]game over"
+text = "game over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -314.0
+margin_top = -42.0
+margin_right = 286.0
+margin_bottom = 162.0
+rect_pivot_offset = Vector2( 309, 72 )
+
+[node name="ScoreSet1" type="Control" parent="EndScreen/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="NewHS" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet1"]
+visible = false
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 313, 46 )
+focus_mode = 2
+custom_colors/default_color = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -8
+custom_constants/shadow_offset_y = 5
+custom_fonts/normal_font = SubResource( 34 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=1.0 sat=0.8 val=0.15][tornado radius=10.0 freq=1.0 connected=1]  NEW HIGH SCORE!"
+text = "  NEW HIGH SCORE!"
+selection_enabled = true
+
+[node name="NewHSmain" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet1/NewHS"]
+margin_left = 8.0
+margin_top = -5.0
+margin_right = 608.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 0, 100 )
+focus_mode = 2
+custom_constants/shadow_offset_x = -8
+custom_constants/shadow_offset_y = 5
+custom_fonts/normal_font = SubResource( 34 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=0.5 sat=0.8 val=0.8][tornado radius=10.0 freq=1.0 connected=1]  NEW HIGH SCORE!"
+text = "  NEW HIGH SCORE!"
+selection_enabled = true
+
+[node name="ScoreSet2" type="Control" parent="EndScreen/VBoxContainer"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 100 )
+rect_pivot_offset = Vector2( 308, 50 )
+
+[node name="SoloScore" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet2"]
+anchor_left = 0.09
+anchor_top = -0.02
+anchor_right = 0.09
+anchor_bottom = -0.02
+margin_right = 600.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 600, 200 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 257, 54 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -6
+custom_constants/shadow_offset_y = 4
+custom_fonts/normal_font = SubResource( 35 )
+bbcode_enabled = true
+bbcode_text = "     Score :     "
+text = "     Score :     "
+
+[node name="ScoreSet3" type="Control" parent="EndScreen/VBoxContainer"]
+margin_top = 208.0
+margin_right = 600.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 0, 100 )
+rect_pivot_offset = Vector2( 308, 50 )
+
+[node name="HighScore" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet3"]
+visible = false
+anchor_left = 0.09
+anchor_top = -0.02
+anchor_right = 0.09
+anchor_bottom = -0.02
+margin_left = 30.0
+margin_right = 630.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 600, 200 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 255, 37 )
+custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_constants/shadow_offset_x = -6
+custom_constants/shadow_offset_y = 4
+custom_fonts/normal_font = SubResource( 36 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=20 freq=3]   Highscore :     "
+text = "   Highscore :     "
 
 [node name="Winner!" type="Label" parent="EndScreen"]
 anchor_left = 0.5
@@ -999,6 +1144,8 @@ margin_left = -345.0
 margin_top = -30.0
 margin_right = 325.0
 margin_bottom = 130.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 343, -29 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -5
 custom_constants/shadow_offset_y = 3
@@ -1029,8 +1176,9 @@ text = " blue!"
 
 [node name="Red" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
+margin_top = 50.0
 margin_right = 203.0
-margin_bottom = 46.0
+margin_bottom = 96.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -7
@@ -1040,8 +1188,9 @@ text = "  red!"
 
 [node name="Green" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
+margin_top = 100.0
 margin_right = 203.0
-margin_bottom = 46.0
+margin_bottom = 146.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -7
@@ -1051,8 +1200,9 @@ text = "green!"
 
 [node name="Black" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
+margin_top = 150.0
 margin_right = 203.0
-margin_bottom = 46.0
+margin_bottom = 196.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
 custom_constants/shadow_offset_x = -7
@@ -1069,7 +1219,23 @@ anims/RESET = SubResource( 27 )
 anims/Red = SubResource( 30 )
 anims/Winner = SubResource( 31 )
 
+[node name="EndScore" type="Button" parent="EndScreen"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.05176e-05
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timer" to="Game2D/BG/pipeSpawn" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerY" to="Game2D/BG/pipeSpawn" method="_on_TimerY_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerYY" to="Game2D/BG/pipeSpawn" method="_on_TimerYY_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforSecond" to="Game2D/BG/pipeSpawn" method="_on_TimerforSecond_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforFirst" to="Game2D/BG/pipeSpawn" method="_on_TimerforFirst_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds1" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds1_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds2" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds2_timeout"]
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds3" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds3_timeout"]
 [connection signal="body_entered" from="Game2D/Birds/P1" to="Game2D/Birds/P1" method="_on_P1_body_entered"]
 [connection signal="body_entered" from="Game2D/Birds/P2" to="Game2D/Birds/P2" method="_on_P2_body_entered"]
 [connection signal="body_entered" from="Game2D/Birds/P3" to="Game2D/Birds/P3" method="_on_P3_body_entered"]
@@ -1097,3 +1263,4 @@ anims/Winner = SubResource( 31 )
 [connection signal="pressed" from="PlayerButs/PauseUI/CenterContainer/VBoxContainer/Resume" to="PlayerButs/PauseUI" method="_on_Resume_pressed"]
 [connection signal="pressed" from="PlayerButs/PauseUI/CenterContainer/VBoxContainer/Restart" to="PlayerButs/PauseUI" method="_on_Restart_pressed"]
 [connection signal="pressed" from="PlayerButs/PauseUI/CenterContainer/VBoxContainer/Quit" to="PlayerButs/PauseUI" method="_on_Quit_pressed"]
+[connection signal="pressed" from="EndScreen/EndScore" to="EndScreen" method="_on_EndScore_pressed"]

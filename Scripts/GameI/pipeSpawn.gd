@@ -15,54 +15,52 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	get_node("Timers/TimerY").start()
 	var pipe = Pipes.instance()
 	Y = rand_range(-45,45)*3.5
 	pipe.position.y = Y
 	add_child(pipe)
+	print("   SaveY")
+	
+	GCD.PrevYY = GCD.PrevY
 	GCD.PrevY = Y
-	if GCD.Stopped == 2:
+	
+	if GCD.Stopped == 3:
 		Mooove()
+		print("move: ", GCD.PrevY)
 
-
-func _on_TimerY_timeout():
-	GCD.PrevYY = Y
-	get_node("Timers/TimerYY").start()
-
-func _on_TimerYY_timeout():
-	GCD.PrevYYY = Y
 
 
 func Mooove():
-	if !First:
-		get_node("Timers/TimerforSecond").start()
 	shift = Y
+	get_node("Timers/TimerforSecond").start()
+	shift = GCD.PrevYY
+	
 	_on_TimerforSecond_timeout()
+	
 func _on_TimerforSecond_timeout():
-	get_node("Timers/TimerforFirst").start()
-func _on_TimerforFirst_timeout():
+	GCD.Stopped = 3
 	var tween = Tween.new()
 	add_child(tween)
-	tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(P3.position.x,240+shift*1.15),2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+	tween.interpolate_property(P3, "position",Vector2(P3.position.x,P3.position.y),Vector2(P3.position.x,240+shift*1.15),1.5,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
 	tween.start()
 	get_node("Timers/TimerforBirds1").start()
 func _on_TimerforBirds1_timeout():
 	var tween = Tween.new()
 	add_child(tween)
-	tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(P2.position.x,240+shift*1.05),2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+	tween.interpolate_property(P2, "position",Vector2(P2.position.x,P2.position.y),Vector2(P2.position.x,240+shift*1.05),1.5,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
 	tween.start()
 	get_node("Timers/TimerforBirds2").start()
 	sshift = shift
 func _on_TimerforBirds2_timeout():
 	var tween = Tween.new()
 	add_child(tween)
-	tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(P1.position.x,240+sshift*0.95),2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+	tween.interpolate_property(P1, "position",Vector2(P1.position.x,P1.position.y),Vector2(P1.position.x,240+sshift*0.95),1.5,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
 	tween.start()
 	get_node("Timers/TimerforBirds3").start()
 func _on_TimerforBirds3_timeout():
 	var tween = Tween.new()
 	add_child(tween)
-	tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(P4.position.x,240+sshift*0.85),2,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
+	tween.interpolate_property(P4, "position",Vector2(P4.position.x,P4.position.y),Vector2(P4.position.x,240+sshift*0.85),1.5,Tween.TRANS_QUAD,Tween.EASE_IN_OUT)
 	tween.start()
 	
 	

@@ -7,7 +7,7 @@ extents = Vector2( 40.7132, 79.1759 )
 
 [node name="Pipe" type="KinematicBody2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 128
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1 )

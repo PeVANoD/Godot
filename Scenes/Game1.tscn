@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Sprites/gameI/but1.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/gameI/but3.png" type="Texture" id=2]
@@ -236,9 +236,28 @@ font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=21]
 size = 90
+outline_color = Color( 1, 1, 1, 0.627451 )
 extra_spacing_top = -8
 extra_spacing_space = -4
 font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=26]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
+
+[sub_resource type="DynamicFont" id=25]
+resource_local_to_scene = true
+size = 40
+outline_color = Color( 0, 1, 0.0745098, 0.784314 )
+extra_spacing_top = -13
+extra_spacing_bottom = -5
+extra_spacing_space = -3
+font_data = ExtResource( 35 )
 
 [sub_resource type="DynamicFont" id=22]
 resource_local_to_scene = true
@@ -252,25 +271,7 @@ font_data = ExtResource( 35 )
 [sub_resource type="DynamicFont" id=24]
 resource_local_to_scene = true
 size = 40
-outline_color = Color( 1, 0, 0, 1 )
-extra_spacing_top = -13
-extra_spacing_bottom = -5
-extra_spacing_space = -3
-font_data = ExtResource( 35 )
-
-[sub_resource type="DynamicFont" id=25]
-resource_local_to_scene = true
-size = 40
-outline_color = Color( 0, 1, 0.0745098, 1 )
-extra_spacing_top = -13
-extra_spacing_bottom = -5
-extra_spacing_space = -3
-font_data = ExtResource( 35 )
-
-[sub_resource type="DynamicFont" id=26]
-resource_local_to_scene = true
-size = 40
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 1, 0, 0, 0.784314 )
 extra_spacing_top = -13
 extra_spacing_bottom = -5
 extra_spacing_space = -3
@@ -278,7 +279,7 @@ font_data = ExtResource( 35 )
 
 [sub_resource type="Animation" id=28]
 resource_name = "Black"
-loop = true
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Black:custom_fonts/font:outline_size")
 tracks/0/interp = 1
@@ -286,14 +287,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 4, 0 ]
+"values": [ 0, 4, 2, 0 ]
 }
 
 [sub_resource type="Animation" id=29]
 resource_name = "Blue"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Blue:custom_fonts/font:outline_size")
 tracks/0/interp = 1
@@ -301,26 +303,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 4, 0 ]
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 4, 2, 0 ]
 }
 
 [sub_resource type="Animation" id=23]
 resource_name = "Green"
-loop = true
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Green:custom_fonts/font:outline_size")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 4, 0 ]
+"values": [ 0, 4, 2, 0 ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -388,6 +390,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=30]
 resource_name = "Red"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:custom_fonts/font:outline_size")
 tracks/0/interp = 1
@@ -395,15 +398,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 4, 0 ]
+"values": [ 0, 4, 2, 0 ]
 }
 
 [sub_resource type="Animation" id=31]
 resource_name = "Winner"
-length = 4.2
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../..:custom_fonts/font:outline_size")
 tracks/0/interp = 1
@@ -411,10 +414,132 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 1.3, 2, 2.4, 2.9, 3.2, 3.5, 3.7, 4.1, 4.2 ),
+"times": PoolRealArray( 0, 0.1, 0.5, 0.9, 1.2, 1.4, 1.6, 1.7, 1.8, 1.9, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0 ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "AppEnd"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../PlayerButs/PauseUI:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../PlayerButs/PauseUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.882353 ), Color( 1, 1, 1, 0.882353 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "DisEnd"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Winner!:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "AppEnd"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("../PlayerButs/PauseUI:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../PlayerButs/PauseUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "DisEnd"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
 
 [node name="Game1main" type="Control"]
@@ -450,21 +575,8 @@ wait_time = 2.0
 
 [node name="Timers" type="Node" parent="Game2D/BG/pipeSpawn"]
 
-[node name="TimerY" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
-wait_time = 2.0
-one_shot = true
-
-[node name="TimerYY" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
-wait_time = 2.0
-one_shot = true
-
 [node name="TimerforSecond" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
-wait_time = 1.9
-one_shot = true
-
-[node name="TimerforFirst" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
-wait_time = 1.5
-one_shot = true
+wait_time = 2.9
 
 [node name="TimerforBirds1" type="Timer" parent="Game2D/BG/pipeSpawn/Timers"]
 wait_time = 0.4
@@ -880,12 +992,10 @@ texture_normal = ExtResource( 14 )
 
 [node name="PauseUI" type="Control" parent="PlayerButs"]
 pause_mode = 2
-modulate = Color( 1, 1, 1, 0.882353 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 512, 37 )
-theme = ExtResource( 30 )
 script = ExtResource( 25 )
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayerButs/PauseUI"]
@@ -1012,6 +1122,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 518, 44 )
 mouse_filter = 2
 script = ExtResource( 36 )
 
@@ -1020,11 +1131,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -317.0
+margin_left = -382.0
 margin_top = -180.0
-margin_right = 383.0
+margin_right = 348.0
 margin_bottom = -20.0
-rect_min_size = Vector2( 700, 160 )
+rect_min_size = Vector2( 730, 160 )
 rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 343, 140 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
@@ -1032,8 +1143,8 @@ custom_constants/shadow_offset_x = -8
 custom_constants/shadow_offset_y = 5
 custom_fonts/normal_font = SubResource( 20 )
 bbcode_enabled = true
-bbcode_text = "[shake rate=10 level=10]game over"
-text = "game over"
+bbcode_text = "[shake rate=10 level=10] game over"
+text = " game over"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
 anchor_left = 0.5
@@ -1043,16 +1154,16 @@ anchor_bottom = 0.5
 margin_left = -314.0
 margin_top = -42.0
 margin_right = 286.0
-margin_bottom = 162.0
-rect_pivot_offset = Vector2( 309, 72 )
+margin_bottom = 266.0
+rect_pivot_offset = Vector2( 344, -379 )
 
 [node name="ScoreSet1" type="Control" parent="EndScreen/VBoxContainer"]
+visible = false
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="NewHS" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet1"]
-visible = false
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
@@ -1084,9 +1195,8 @@ text = "  NEW HIGH SCORE!"
 selection_enabled = true
 
 [node name="ScoreSet2" type="Control" parent="EndScreen/VBoxContainer"]
-margin_top = 104.0
 margin_right = 600.0
-margin_bottom = 204.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 rect_pivot_offset = Vector2( 308, 50 )
 
@@ -1101,14 +1211,15 @@ rect_min_size = Vector2( 600, 200 )
 rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 257, 54 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
-custom_constants/shadow_offset_x = -6
-custom_constants/shadow_offset_y = 4
+custom_constants/shadow_offset_x = -5
+custom_constants/shadow_offset_y = 3
 custom_fonts/normal_font = SubResource( 35 )
 bbcode_enabled = true
 bbcode_text = "     Score :     "
 text = "     Score :     "
 
 [node name="ScoreSet3" type="Control" parent="EndScreen/VBoxContainer"]
+visible = false
 margin_top = 208.0
 margin_right = 600.0
 margin_bottom = 308.0
@@ -1116,7 +1227,6 @@ rect_min_size = Vector2( 0, 100 )
 rect_pivot_offset = Vector2( 308, 50 )
 
 [node name="HighScore" type="RichTextLabel" parent="EndScreen/VBoxContainer/ScoreSet3"]
-visible = false
 anchor_left = 0.09
 anchor_top = -0.02
 anchor_right = 0.09
@@ -1128,8 +1238,8 @@ rect_min_size = Vector2( 600, 200 )
 rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 255, 37 )
 custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
-custom_constants/shadow_offset_x = -6
-custom_constants/shadow_offset_y = 4
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 3
 custom_fonts/normal_font = SubResource( 36 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=20 freq=3]   Highscore :     "
@@ -1162,29 +1272,20 @@ margin_left = -101.5
 margin_top = 1.0
 margin_right = 101.5
 margin_bottom = 197.0
+rect_pivot_offset = Vector2( 104.5, 90 )
+alignment = 1
 
-[node name="Blue" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+[node name="Black" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
+margin_top = 75.0
 margin_right = 203.0
-margin_bottom = 46.0
+margin_bottom = 121.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 0.00392157 )
 custom_constants/shadow_offset_x = -7
 custom_constants/shadow_offset_y = 4
-custom_fonts/font = SubResource( 22 )
-text = " blue!"
-
-[node name="Red" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
-visible = false
-margin_top = 50.0
-margin_right = 203.0
-margin_bottom = 96.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
-custom_constants/shadow_offset_x = -7
-custom_constants/shadow_offset_y = 4
-custom_fonts/font = SubResource( 24 )
-text = "  red!"
+custom_fonts/font = SubResource( 26 )
+text = "black!"
 
 [node name="Green" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
@@ -1192,23 +1293,35 @@ margin_top = 100.0
 margin_right = 203.0
 margin_bottom = 146.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 0.00392157 )
 custom_constants/shadow_offset_x = -7
 custom_constants/shadow_offset_y = 4
 custom_fonts/font = SubResource( 25 )
 text = "green!"
 
-[node name="Black" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+[node name="Blue" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
+visible = false
+margin_top = 125.0
+margin_right = 203.0
+margin_bottom = 171.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 22 )
+text = " blue!"
+
+[node name="Red" type="Label" parent="EndScreen/Winner!/VBoxContainer"]
 visible = false
 margin_top = 150.0
 margin_right = 203.0
 margin_bottom = 196.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0.34902, 0.537255, 0.698039, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 0.00392157 )
 custom_constants/shadow_offset_x = -7
 custom_constants/shadow_offset_y = 4
-custom_fonts/font = SubResource( 26 )
-text = "black!"
+custom_fonts/font = SubResource( 24 )
+text = "  red!"
 
 [node name="WinAnim" type="AnimationPlayer" parent="EndScreen/Winner!"]
 root_node = NodePath("../VBoxContainer/Red")
@@ -1228,11 +1341,19 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
+[node name="DissapEnding" type="AnimationPlayer" parent="EndScreen"]
+pause_mode = 2
+anims/AppEnd = SubResource( 38 )
+anims/DisEnd = SubResource( 37 )
+
+[node name="AppEnding" type="AnimationPlayer" parent="EndScreen"]
+pause_mode = 2
+anims/AppEnd = SubResource( 39 )
+anims/DisEnd = SubResource( 40 )
+
+[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timer" to="Game2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timer" to="Game2D/BG/pipeSpawn" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerY" to="Game2D/BG/pipeSpawn" method="_on_TimerY_timeout"]
-[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerYY" to="Game2D/BG/pipeSpawn" method="_on_TimerYY_timeout"]
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforSecond" to="Game2D/BG/pipeSpawn" method="_on_TimerforSecond_timeout"]
-[connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforFirst" to="Game2D/BG/pipeSpawn" method="_on_TimerforFirst_timeout"]
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds1" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds1_timeout"]
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds2" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds2_timeout"]
 [connection signal="timeout" from="Game2D/BG/pipeSpawn/Timers/TimerforBirds3" to="Game2D/BG/pipeSpawn" method="_on_TimerforBirds3_timeout"]

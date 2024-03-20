@@ -29,27 +29,27 @@ animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "FlyI",
-"speed": 5.5
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "FlyII",
-"speed": 5.5
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "FlyIII",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 16 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "FlyIV",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "FlySolo",
-"speed": 5.0
+"speed": 7.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]

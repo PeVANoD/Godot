@@ -1,0 +1,275 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Fonts/Raw/BigPixelIn.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Raw/BigPixelOut.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Anims/Gametitle_color.tres" type="Animation" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+outline_color = Color( 0.74902, 0.941176, 1, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 90
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game:custom_fonts/font:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.74902, 0.941176, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game:custom_fonts/font:outline_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Party:custom_fonts/font:outline_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Party:custom_fonts/font:outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "title_color 2"
+length = 6.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game:custom_fonts/font:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.227451, 0.658824, 0.894118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.556863, 0.34902, 0.933333, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.270588, 0.972549, 1 ), Color( 1, 1, 1, 1 ), Color( 0.941176, 0.164706, 0.164706, 1 ), Color( 1, 1, 1, 1 ), Color( 0.964706, 0.745098, 0.156863, 1 ), Color( 0.905882, 0.905882, 0.905882, 1 ), Color( 0.654902, 1, 0.0980392, 1 ), Color( 0.917647, 0.917647, 0.917647, 1 ), Color( 0, 1, 0.298039, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game:custom_fonts/font:outline_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Party:custom_fonts/font:outline_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.75, 3.5, 5.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 7, 0, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Party:custom_fonts/font:outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.75, 3.5, 5.25, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "title_color 3"
+length = 6.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game:custom_fonts/font:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.227451, 0.658824, 0.894118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.556863, 0.34902, 0.933333, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.270588, 0.972549, 1 ), Color( 1, 1, 1, 1 ), Color( 0.941176, 0.164706, 0.164706, 1 ), Color( 1, 1, 1, 1 ), Color( 0.964706, 0.745098, 0.156863, 1 ), Color( 0.905882, 0.905882, 0.905882, 1 ), Color( 0.654902, 1, 0.0980392, 1 ), Color( 0.917647, 0.917647, 0.917647, 1 ), Color( 0, 1, 0.298039, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game:custom_fonts/font:outline_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Party:custom_fonts/font:outline_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.75, 3.5, 5.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 7, 0, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Party:custom_fonts/font:outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.75, 3.5, 5.25, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "title_color 3 2"
+length = 6.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game:custom_fonts/font:outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.227451, 0.658824, 0.894118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.556863, 0.34902, 0.933333, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.270588, 0.972549, 1 ), Color( 1, 1, 1, 1 ), Color( 0.941176, 0.164706, 0.164706, 1 ), Color( 1, 1, 1, 1 ), Color( 0.964706, 0.745098, 0.156863, 1 ), Color( 0.905882, 0.905882, 0.905882, 1 ), Color( 0.654902, 1, 0.0980392, 1 ), Color( 0.917647, 0.917647, 0.917647, 1 ), Color( 0, 1, 0.298039, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game:custom_fonts/font:outline_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Party:custom_fonts/font:outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.227451, 0.658824, 0.894118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.556863, 0.34902, 0.933333, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.270588, 0.972549, 1 ), Color( 1, 1, 1, 1 ), Color( 0.941176, 0.164706, 0.164706, 1 ), Color( 1, 1, 1, 1 ), Color( 0.964706, 0.745098, 0.156863, 1 ), Color( 1, 1, 1, 1 ), Color( 0.654902, 1, 0.0980392, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 1, 0.298039, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Party:custom_fonts/font:outline_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0 ]
+}
+
+[node name="GameTitle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Game" type="Label" parent="."]
+light_mask = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -412.0
+margin_top = -163.0
+margin_right = 103.0
+margin_bottom = -20.0
+rect_min_size = Vector2( 300, 106 )
+custom_colors/font_color_shadow = Color( 0.294118, 0.486275, 0.662745, 1 )
+custom_constants/shadow_offset_x = -8
+custom_constants/shadow_offset_y = 8
+custom_fonts/font = SubResource( 1 )
+text = "GAME"
+
+[node name="Party" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -163.0
+margin_right = 488.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 300, 120 )
+custom_colors/font_color_shadow = Color( 0.294118, 0.486275, 0.662745, 1 )
+custom_constants/shadow_offset_x = -8
+custom_constants/shadow_offset_y = 8
+custom_constants/shadow_as_outline = 0
+custom_fonts/font = SubResource( 2 )
+text = "PARTY
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "title_color"
+playback_speed = 0.8
+anims/Gametitle_color = ExtResource( 3 )
+anims/RESET = SubResource( 4 )
+anims/title_color = ExtResource( 3 )
+"anims/title_color 2" = SubResource( 5 )
+"anims/title_color 3" = SubResource( 6 )
+"anims/title_color 3 2" = SubResource( 7 )

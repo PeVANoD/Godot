@@ -28,6 +28,7 @@ func ReEnter():
 	get_node("MenuUI").rect_position = Vector2(get_node("MenuUI").rect_position.x,0)
 	get_node("StartUI/GameStart").visible = false;
 	get_node("StartUI/Touch").visible = false;
+	get_tree().get_root().get_node("Main/UI/MenuUI/ChooseGameWin/GameWin/Flapps/GameTitleTexture/Flapps").play("Flapps")
 	get_tree().get_root().get_node("Main/Background").color = Color("4c72ab")
 	
 	

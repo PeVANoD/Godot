@@ -7,12 +7,13 @@ onready var topPipe = get_node("TPipe")
 onready var botPipe = get_node("BPipe")
 
 
-
 onready var velocity
 
 const SPEED = -200.0
 
 func _ready():
+	topPipe.position.y = GCD.pipeExpance
+	botPipe.position.y = -GCD.pipeExpance
 	velocity = Vector2(SPEED, 0)
 	var _k = move_and_collide(Vector2(get_viewport_rect().size.x/12,0))
 	

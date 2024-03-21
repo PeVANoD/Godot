@@ -8,15 +8,32 @@ var shift = 0
 var sshift = 0
 var First = 1
 
+
 var Y = 0
 
 func _ready():
-	pass
-
+	if GCD.playerCount == 1:
+		GCD.pipeExpance = -320
+	elif GCD.playerCount == 2:
+		GCD.pipeExpance = -330
+	else: 
+		GCD.pipeExpance = -340
 
 func _on_Timer_timeout():
+	if GCD.playerCount == 1 and GCD.pipeExpance < -290:
+		GCD.pipeExpance += 3
+	elif GCD.playerCount == 2 and GCD.pipeExpance < -290:
+		GCD.pipeExpance += 2
+	elif GCD.pipeExpance < -290:
+		GCD.pipeExpance += 1
+		
+	var Rdif = 157.5+290+GCD.pipeExpance
+	print("Rdif: ", Rdif)
+	
+	print("Expance: ",GCD.pipeExpance)
 	var pipe = Pipes.instance()
-	Y = rand_range(-45,45)*3.5
+	
+	Y = rand_range(-157.5+Rdif,157.5-Rdif)
 	pipe.position.y = Y
 	add_child(pipe)
 	print("   SaveY")

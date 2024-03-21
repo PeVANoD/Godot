@@ -15,6 +15,7 @@ var But4 = 0
 var PrevY = 0
 var PrevYY = 0
 var PrevYYY = 0
+var pipeExpance = -340
 #GameScore
 var ScSolo = -1
 var ScP1 = -1

@@ -1,0 +1,16 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "SoundSetAnim"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/MenuUI/SoundSet:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15, 481 ), Vector2( 10, 486 ), Vector2( 8, 488 ), Vector2( 10, 486 ), Vector2( 15, 481 ) ]
+}

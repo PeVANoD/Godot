@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Pipe.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/GameI/Pipe.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.3125, 236.439 )
+
+[node name="PipeHandler" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="TPipe" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -290 )
+rotation = 3.14159
+scale = Vector2( -1, 1 )
+
+[node name="BPipe" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 290 )
+
+[node name="DetP1" type="Area2D" parent="."]
+position = Vector2( 65, 0 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Col1" type="CollisionShape2D" parent="DetP1"]
+position = Vector2( -25, -1 )
+shape = SubResource( 1 )
+
+[node name="DetP2" type="Area2D" parent="."]
+position = Vector2( 65, 0 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="Col2" type="CollisionShape2D" parent="DetP2"]
+position = Vector2( -25, -1 )
+shape = SubResource( 1 )
+
+[node name="DetP3" type="Area2D" parent="."]
+position = Vector2( 65, 0 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="Col3" type="CollisionShape2D" parent="DetP3"]
+position = Vector2( -25, -1 )
+shape = SubResource( 1 )
+
+[node name="DetP4" type="Area2D" parent="."]
+position = Vector2( 65, 0 )
+collision_layer = 16
+collision_mask = 16
+
+[node name="Col4" type="CollisionShape2D" parent="DetP4"]
+position = Vector2( -25, -1 )
+shape = SubResource( 1 )
+
+[node name="DetSolo" type="Area2D" parent="."]
+position = Vector2( 65, 0 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="ColSolo" type="CollisionShape2D" parent="DetSolo"]
+position = Vector2( -25, 0 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 44, -1 )
+scale = Vector2( 0.15, 10.2 )
+
+[connection signal="area_exited" from="DetP1" to="." method="_on_DetP1_area_exited"]
+[connection signal="area_exited" from="DetP2" to="." method="_on_DetP2_area_exited"]
+[connection signal="area_exited" from="DetP3" to="." method="_on_DetP3_area_exited"]
+[connection signal="area_exited" from="DetP4" to="." method="_on_DetP4_area_exited"]
+[connection signal="area_exited" from="DetSolo" to="." method="_on_DetSolo_area_exited"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
